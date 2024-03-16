@@ -117,4 +117,8 @@ public class FormPencarian extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldJudul;
     private javax.swing.JTable jtBuku;
     // End of variables declaration//GEN-END:variables
+
+    private void myInitComponents() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

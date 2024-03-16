@@ -4,51 +4,46 @@ import java.util.ArrayList;
 
 public class PeminjamanController {
     
-    private FormPeminjaman formPeminjaman;
-    private ArrayList<BukuDipinjam> bukuDipinjamCollection;
-    
-    public PeminjamanController() {
-        bukuDipinjamCollection = new ArrayList<>();
-    }
-    
     public void showFormPeminjaman() {
-        formPeminjaman = new FormPeminjaman();
-        formPeminjaman.tampilkan();
+        FormPeminjaman formPeminjaman = new FormPeminjaman();
+        formPeminjaman.show(); 
     }
     
-    public void pinjam(Buku buku, int lama) {
-        BukuDipinjam bukuDipinjam = new BukuDipinjam();
-        bukuDipinjam.judul = buku.judul;
-        bukuDipinjam.lama = lama;
-        bukuDipinjamCollection.add(bukuDipinjam);
-        
-        // Menampilkan pesan konfirmasi
-        DialogUI dialogUI = new DialogUI("Buku berhasil dipinjam!");
-        dialogUI.pack();
-        dialogUI.setLocationRelativeTo(null);
-        dialogUI.setVisible(true);
-    }
-    
-    public void tampilPinjaman(Buku[] buku) {
-        StringBuilder message = new StringBuilder("Buku yang sedang dipinjam:\n");
-        for (BukuDipinjam bukuDipinjam : bukuDipinjamCollection) {
-            message.append("- ").append(bukuDipinjam.judul).append(" (Lama: ").append(bukuDipinjam.lama).append(" hari)\n");
+    public void cariBuku(String judul) {
+        BukuProvider bukuProvider = new BukuProvider();
+        try {
+            ArrayList<Buku> listBuku = bukuProvider.selectBuku(judul);
+            if(listBuku.isEmpty())
+            {
+                DialogUI dialogUI = new DialogUI("Buku tidak terdaftar");
+                dialogUI.pack();
+                dialogUI.setLocationRelativeTo(null);
+                dialogUI.setVisible(true);
+            } 
+            else {
+                Perpustakaan.formPencarian.display(listBuku);
+            }
+        } catch(Exception ex) {
+            DialogUI dialogUI = new DialogUI("Connection Error");
+            dialogUI.pack();
+            dialogUI.setLocationRelativeTo(null);
+            dialogUI.setVisible(true);
         }
-        
-        // Menampilkan informasi peminjaman
-        DialogUI dialogUI = new DialogUI(message.toString());
-        dialogUI.pack();
-        dialogUI.setLocationRelativeTo(null);
-        dialogUI.setVisible(true);
     }
     
-    public void hapusBuku(BukuDipinjam bukuDipinjam) {
-        bukuDipinjamCollection.remove(bukuDipinjam);
-        
-        // Menampilkan pesan konfirmasi
-        DialogUI dialogUI = new DialogUI("Buku berhasil dihapus dari peminjaman!");
-        dialogUI.pack();
-        dialogUI.setLocationRelativeTo(null);
-        dialogUI.setVisible(true);
+    public void pinjam(BukuDipinjam[] bukuDipinjams) {
+        PeminjamanManager peminjamanManager = new PeminjamanManager();
+        boolean success = peminjamanManager.save(bukuDipinjams);
+        if (success) {
+            DialogUI dialogUI = new DialogUI("Peminjaman berhasil disimpan");
+            dialogUI.pack();
+            dialogUI.setLocationRelativeTo(null);
+            dialogUI.setVisible(true);
+        } else {
+            DialogUI dialogUI = new DialogUI("Peminjaman gagal disimpan");
+            dialogUI.pack();
+            dialogUI.setLocationRelativeTo(null);
+            dialogUI.setVisible(true);
+        }
     }
 }

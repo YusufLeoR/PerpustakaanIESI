@@ -1,12 +1,27 @@
 package perpustakaan;
 
 public class BukuDipinjam {
-    
-    public String judul;
-    public int lama;
-    
-    public BukuDipinjam(String judul, int lama) {
+    private String judul;
+    private int lamaPinjam;
+
+    public BukuDipinjam(String judul, int lamaPinjam) {
         this.judul = judul;
-        this.lama = lama;
-    }    
+        this.lamaPinjam = lamaPinjam;
+    }
+
+    public String getJudul() {
+        return judul;
+    }
+
+    public void setJudul(String judul) {
+        this.judul = judul;
+    }
+
+    public int getLamaPinjam() {
+        return lamaPinjam;
+    }
+
+    public void setLamaPinjam(int lamaPinjam) {
+        this.lamaPinjam = lamaPinjam;
+    }
 }

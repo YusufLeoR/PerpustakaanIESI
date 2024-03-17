@@ -5,6 +5,7 @@
 package perpustakaan;
 
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,6 +20,14 @@ public class FormPeminjaman extends javax.swing.JFrame {
     public FormPeminjaman() {
         initComponents();
     }
+    
+    public void tampilkan() {
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,16 +50,10 @@ public class FormPeminjaman extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        inpPeminjaman.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inpPeminjamanActionPerformed(evt);
-            }
-        });
-
         btCari.setText("Cari");
-        btCari.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btCariMouseClicked(evt);
+        btCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCariActionPerformed(evt);
             }
         });
 
@@ -70,12 +73,6 @@ public class FormPeminjaman extends javax.swing.JFrame {
 
         tablePencarian.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(tablePencarian);
-
-        jScrollPane2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jScrollPane2MouseDragged(evt);
-            }
-        });
 
         tablePeminjaman.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -143,18 +140,12 @@ public class FormPeminjaman extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jScrollPane1.getAccessibleContext().setAccessibleParent(null);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBatalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btBatalActionPerformed
-
-    private void inpPeminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpPeminjamanActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inpPeminjamanActionPerformed
 
     private void btPinjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPinjamActionPerformed
         // TODO add your handling code here:
@@ -164,15 +155,11 @@ public class FormPeminjaman extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btKonfirmasiActionPerformed
 
-    private void jScrollPane2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane2MouseDragged
+    private void btCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCariActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jScrollPane2MouseDragged
-
-    private void btCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btCariMouseClicked
-        // TODO add your handling code here:
-        String judul = inpPeminjaman.getText();
-        Perpustakaan.controllerPencarian.cariBuku(judul);
-    }//GEN-LAST:event_btCariMouseClicked
+        String judulBuku = inpPeminjaman.getText();
+        Perpustakaan.controllerPeminjaman.cariBuku(judulBuku);
+    }//GEN-LAST:event_btCariActionPerformed
 
     public void display(ArrayList<Buku> bukuList) {
         Object[] kolom = { "Judul" };
@@ -197,124 +184,4 @@ public class FormPeminjaman extends javax.swing.JFrame {
     private javax.swing.JTable tablePencarian;
     // End of variables declaration//GEN-END:variables
 
-    private void MyinitComponentS() {
-        inpPeminjaman = new javax.swing.JTextField();
-        btCari = new javax.swing.JButton();
-        btPinjam = new javax.swing.JButton();
-        btBatal = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablePencarian = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tablePeminjaman = new javax.swing.JTable();
-        btKonfirmasi = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        inpPeminjaman.setText("Input");
-        inpPeminjaman.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inpPeminjamanActionPerformed(evt);
-            }
-        });
-
-        btCari.setText("Cari");
-        btCari.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btCariMouseClicked(evt);
-            }
-        });
-
-        btPinjam.setText("Pinjam");
-        btPinjam.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btPinjamActionPerformed(evt);
-            }
-        });
-
-        btBatal.setText("Batal");
-        btBatal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btBatalActionPerformed(evt);
-            }
-        });
-
-        tablePencarian.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane1.setViewportView(tablePencarian);
-
-        tablePeminjaman.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane2.setViewportView(tablePeminjaman);
-
-        btKonfirmasi.setText("Konfirmasi");
-        btKonfirmasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btKonfirmasiActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(inpPeminjaman, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btPinjam, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btBatal, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
-                        .addComponent(btCari, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(575, 575, 575)
-                .addComponent(btKonfirmasi, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(inpPeminjaman, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btCari)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(btPinjam)
-                        .addGap(18, 18, 18)
-                        .addComponent(btBatal)))
-                .addGap(32, 32, 32)
-                .addComponent(btKonfirmasi)
-                .addGap(51, 51, 51))
-        );
-
-        pack();
-    }
 }

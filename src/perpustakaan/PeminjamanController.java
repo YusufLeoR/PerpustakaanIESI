@@ -5,8 +5,10 @@ import java.util.ArrayList;
 public class PeminjamanController {
     
     public void showFormPeminjaman() {
-        FormPeminjaman formPeminjaman = new FormPeminjaman();
-        formPeminjaman.show(); 
+        if (Perpustakaan.formPeminjaman == null) {
+            Perpustakaan.formPeminjaman = new FormPeminjaman();
+        }
+        Perpustakaan.formPeminjaman.setVisible(true);
     }
     
     public void cariBuku(String judul) {
@@ -21,7 +23,7 @@ public class PeminjamanController {
                 dialogUI.setVisible(true);
             } 
             else {
-                Perpustakaan.formPencarian.display(listBuku);
+                Perpustakaan.formPeminjaman.display(listBuku);
             }
         } catch(Exception ex) {
             DialogUI dialogUI = new DialogUI("Connection Error");

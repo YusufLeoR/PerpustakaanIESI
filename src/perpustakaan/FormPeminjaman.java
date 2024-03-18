@@ -157,6 +157,25 @@ public class FormPeminjaman extends javax.swing.JFrame {
 
     private void btPinjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPinjamActionPerformed
         // TODO add your handling code here:
+        String durasiPinjamString = jTextField1.getText();
+        int durasiPinjam = Integer.parseInt(durasiPinjamString);
+        int bukuDipilih = tablePencarian.getSelectedColumn();
+        
+        
+        if (durasiPinjam > 3){
+            DialogUI dialogUI = new DialogUI("Lama Peminjaman maksimal 3 hari");
+            dialogUI.pack();
+            dialogUI.setLocationRelativeTo(null);
+            dialogUI.setVisible(true);        
+        }
+        
+        if (bukuDipilih == -1){
+            DialogUI dialogUI = new DialogUI("Pilih buku yang ingin dipinjam");
+            dialogUI.pack();
+            dialogUI.setLocationRelativeTo(null);
+            dialogUI.setVisible(true);    
+        }
+        
     }//GEN-LAST:event_btPinjamActionPerformed
 
     private void btKonfirmasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btKonfirmasiActionPerformed
@@ -178,6 +197,12 @@ public class FormPeminjaman extends javax.swing.JFrame {
             model.addRow(baris);
         }    
         tablePencarian.setModel(model);
+    }
+    
+    public void tambahBuku(){
+    
+    
+    
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

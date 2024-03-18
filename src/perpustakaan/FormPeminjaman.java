@@ -82,7 +82,8 @@ public class FormPeminjaman extends javax.swing.JFrame {
 
             },
             new String [] {
-
+                "Judul",
+                "Durasi Peminjaman"
             }
         ));
         jScrollPane2.setViewportView(tablePeminjaman);
@@ -164,29 +165,49 @@ public class FormPeminjaman extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btBatalActionPerformed
 
-    private void btPinjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPinjamActionPerformed
+    private void btPinjamActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        String durasiPinjamString = jTextField1.getText();
-        int durasiPinjam = Integer.parseInt(durasiPinjamString);
-        int bukuDipilih = tablePencarian.getSelectedColumn();
+        int bukuPinjam = tablePencarian.getSelectedRow();
+        String durasiString = jTextField1.getText();
+        int durasiInt = 0;
         
-        
-        if (durasiPinjam > 3){
-            DialogUI dialogUI = new DialogUI("Lama Peminjaman maksimal 3 hari");
-            dialogUI.pack();
-            dialogUI.setLocationRelativeTo(null);
-            dialogUI.setVisible(true);        
-        }
-        
-        if (bukuDipilih == -1){
-            DialogUI dialogUI = new DialogUI("Pilih buku yang ingin dipinjam");
-            dialogUI.pack();
-            dialogUI.setLocationRelativeTo(null);
-            dialogUI.setVisible(true);    
-        }
-        
-    }//GEN-LAST:event_btPinjamActionPerformed
+        if (durasiString.isEmpty()) {
+        DialogUI dialogUI = new DialogUI("Silahkan masukkan durasi pinjaman");
+        dialogUI.pack();
+        dialogUI.setLocationRelativeTo(null);
+        dialogUI.setVisible(true);
+        return;
+    }
 
+        if (!durasiString.matches("[0-9]+")) { 
+            DialogUI dialogUI = new DialogUI("Durasi harus berupa angka");
+            dialogUI.pack();
+            dialogUI.setLocationRelativeTo(null);
+            dialogUI.setVisible(true);
+            return;
+        }
+
+        durasiInt = Integer.parseInt(durasiString);
+
+        if (durasiInt > 3) {
+            DialogUI dialogUI = new DialogUI("Lama peminjaman maksimal 3 hari");
+            dialogUI.pack();
+            dialogUI.setLocationRelativeTo(null);
+            dialogUI.setVisible(true);
+            return;
+        }
+
+        if (bukuPinjam == -1) {
+            DialogUI dialogUI = new DialogUI("Silahkan pilih buku yang ingin dipinjam.");
+            dialogUI.pack();
+            dialogUI.setLocationRelativeTo(null);
+            dialogUI.setVisible(true);
+            return;
+        }
+        
+            tambahBuku(bukuPinjam, durasiInt);
+        
+    }
     private void btKonfirmasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btKonfirmasiActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btKonfirmasiActionPerformed
@@ -208,8 +229,14 @@ public class FormPeminjaman extends javax.swing.JFrame {
         tablePencarian.setModel(model);
     }
     
-    public void tambahBuku(){
-
+    public void tambahBuku(int judul, int durasiPinjam) {
+        Object[] baris = { tablePencarian.getValueAt(judul, 0), durasiPinjam };
+        tampilPinjam(baris);
+    }
+    
+    public void tampilPinjam(Object[] baris){
+        DefaultTableModel model = (DefaultTableModel) tablePeminjaman.getModel();
+        model.addRow(baris);
     }
 
     public void hapusBuku(int bukuDipilih) {

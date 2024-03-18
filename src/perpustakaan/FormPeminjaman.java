@@ -153,6 +153,15 @@ public class FormPeminjaman extends javax.swing.JFrame {
 
     private void btBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBatalActionPerformed
         // TODO add your handling code here:
+        int bukuDipilih = tablePeminjaman.getSelectedRow();
+        if (bukuDipilih == -1) {
+            DialogUI dialogUI = new DialogUI("Pilih buku yang ingin dihapus");
+            dialogUI.pack();
+            dialogUI.setLocationRelativeTo(null);
+            dialogUI.setVisible(true);
+        } else {
+            hapusBuku(bukuDipilih);
+        }
     }//GEN-LAST:event_btBatalActionPerformed
 
     private void btPinjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPinjamActionPerformed
@@ -200,9 +209,12 @@ public class FormPeminjaman extends javax.swing.JFrame {
     }
     
     public void tambahBuku(){
-    
-    
-    
+
+    }
+
+    public void hapusBuku(int bukuDipilih) {
+        DefaultTableModel model = (DefaultTableModel) tablePeminjaman.getModel();
+        model.removeRow(bukuDipilih);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

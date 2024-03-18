@@ -189,8 +189,8 @@ public class FormPeminjaman extends javax.swing.JFrame {
 
         durasiInt = Integer.parseInt(durasiString);
 
-        if (durasiInt > 3) {
-            DialogUI dialogUI = new DialogUI("Lama peminjaman maksimal 3 hari");
+        if (durasiInt > 3 || durasiInt < 1) {
+            DialogUI dialogUI = new DialogUI("Lama peminjaman maksimal 3 hari dan minimal 1 hari");
             dialogUI.pack();
             dialogUI.setLocationRelativeTo(null);
             dialogUI.setVisible(true);
@@ -210,6 +210,24 @@ public class FormPeminjaman extends javax.swing.JFrame {
     }
     private void btKonfirmasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btKonfirmasiActionPerformed
         // TODO add your handling code here:
+        int jumlahBukuDipinjam = tablePeminjaman.getRowCount();
+
+        if (jumlahBukuDipinjam > 10) {
+            DialogUI dialogUI = new DialogUI("Jumlah buku yang dipinjam melebihi batas maksimal 10 buku");
+            dialogUI.pack();
+            dialogUI.setLocationRelativeTo(null);
+            dialogUI.setVisible(true);
+            return;
+        }
+        
+        BukuDipinjam[] bukuDipinjams = new BukuDipinjam[jumlahBukuDipinjam];
+        for (int i = 0; i < jumlahBukuDipinjam; i++) {
+            String judul = tablePeminjaman.getValueAt(i, 0).toString();
+            int durasi = Integer.parseInt(tablePeminjaman.getValueAt(i, 1).toString());
+            bukuDipinjams[i] = new BukuDipinjam(judul, durasi);
+        }
+
+        Perpustakaan.controllerPeminjaman.pinjam(bukuDipinjams);
     }//GEN-LAST:event_btKonfirmasiActionPerformed
 
     private void btCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCariActionPerformed

@@ -37,12 +37,7 @@ public class PeminjamanController {
         PeminjamanManager peminjamanManager = new PeminjamanManager();
         boolean success = peminjamanManager.save(bukuDipinjams);
         if (success) {
-            DialogUI dialogUI = new DialogUI("Peminjaman berhasil disimpan");
-            dialogUI.pack();
-            dialogUI.setLocationRelativeTo(null);
-            dialogUI.setVisible(true);
-        } else {
-            DialogUI dialogUI = new DialogUI("Peminjaman gagal disimpan");
+            DialogUI dialogUI = new DialogUI("Peminjaman telah dikonfirmasi");
             dialogUI.pack();
             dialogUI.setLocationRelativeTo(null);
             dialogUI.setVisible(true);
